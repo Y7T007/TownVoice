@@ -3,6 +3,7 @@ package server
 import (
 	"TownVoice/internal/handlers"
 	"html/template"
+	"log"
 	"net/http"
 )
 
@@ -24,5 +25,9 @@ func Start() {
 	})
 	http.HandleFunc("/login", handlers.LoginHandler)
 
-	http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(":8082", nil)
+	if err != nil {
+		log.Fatalf("error starting server: %v", err)
+	}
+	println("Server started on :8082")
 }

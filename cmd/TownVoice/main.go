@@ -11,9 +11,14 @@ import (
 func main() {
 	cid, err := ipfs.AddFile("Hello, IPFS!")
 	if err != nil {
-		log.Fatalf("error adding file to IPFS: %v", err)
+		log.Printf("error adding file to IPFS: %v", err) // Log the error and continue
+	} else {
+		fmt.Println("added file:", cid)
 	}
-	fmt.Println("added file:", cid)
 
-	server.Start()
+	// Start the server regardless of whether the file was successfully added to IPFS
+	go server.Start()
+
+	// Keep the main function from exiting
+	select {}
 }

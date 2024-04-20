@@ -2,7 +2,10 @@ module TownVoice
 
 go 1.22
 
-require golang.org/x/crypto v0.22.0
+require (
+	github.com/ipfs/go-ipfs-api v0.7.0
+	golang.org/x/crypto v0.22.0
+)
 
 require (
 	github.com/benbjohnson/clock v1.3.0 // indirect
@@ -11,7 +14,6 @@ require (
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.1.0 // indirect
 	github.com/ipfs/boxo v0.12.0 // indirect
 	github.com/ipfs/go-cid v0.4.1 // indirect
-	github.com/ipfs/go-ipfs-api v0.7.0 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.3 // indirect
 	github.com/libp2p/go-buffer-pool v0.1.0 // indirect
 	github.com/libp2p/go-flow-metrics v0.1.0 // indirect

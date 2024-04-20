@@ -1,6 +1,7 @@
 package server
 
 import (
+	"TownVoice/internal/auth/controller"
 	"TownVoice/internal/handlers"
 	"html/template"
 	"log"
@@ -24,6 +25,8 @@ func Start() {
 		tmpl.Execute(w, data)
 	})
 	http.HandleFunc("/login", handlers.LoginHandler)
+	http.HandleFunc("/auth/register-client", controller.RegisterClient)
+	http.HandleFunc("/auth/login-client", controller.LoginClient)
 
 	err := http.ListenAndServe(":8082", nil)
 	if err != nil {

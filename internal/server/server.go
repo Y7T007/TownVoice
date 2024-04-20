@@ -1,6 +1,7 @@
 package server
 
 import (
+	"TownVoice/internal/handlers"
 	"html/template"
 	"net/http"
 )
@@ -16,11 +17,12 @@ func Start() {
 
 		data := PageData{
 			Title: "My Dynamic Title",
-			Body:  "This is dynamic content from the server.go ",
+			Body:  "This is dynamic content from the server.go",
 		}
 
 		tmpl.Execute(w, data)
 	})
+	http.HandleFunc("/login", handlers.LoginHandler)
 
 	http.ListenAndServe(":8080", nil)
 }

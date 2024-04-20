@@ -4,9 +4,28 @@ package controller
 import (
 	"TownVoice/internal/models/auth"
 	"encoding/json"
+	"github.com/dgrijalva/jwt-go"
 	"html/template"
 	"net/http"
+	"os"
+	"time"
 )
+
+func GenerateJWT(user *auth.Client) (string, error) {
+	token := jwt.New(jwt.SigningMethodHS256)
+
+	claims := token.Claims.(jwt.MapClaims)
+	claims["authorized"] = true
+	claims["user"] = user.Email
+	claims["exp"] = time.Now().Add(time.Minute * 30).Unix()
+
+	tokenString, err := token.SignedString([]byte(os.Getenv("JWT_SECRET")))
+	if err != nil {
+		return "", err
+	}
+
+	return tokenString, nil
+}
 
 func LoginClient(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
@@ -22,13 +41,20 @@ func LoginClient(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// Authenticate the user
-		//isValidClient := auth.AuthenticateClient(user)
-		//if !isValidClient {
-		//	http.Error(w, "Invalid credentials", http.StatusUnauthorized)
-		//	return
-		//}
+		isValidClient := auth.AuthenticateClient(user)
+		if !isValidClient {
+			http.Error(w, "Invalid credentials", http.StatusUnauthorized)
+			return
+		}
+
+		// Generate JWT
+		tokenString, err := GenerateJWT(user)
+		if err != nil {
+			http.Error(w, "Error generating token", http.StatusInternalServerError)
+			return
+		}
 
 		// Respond to the client
-		w.Write([]byte("Logged in successfully"))
+		json.NewEncoder(w).Encode(map[string]string{"token": tokenString})
 	}
 }

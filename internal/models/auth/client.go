@@ -26,7 +26,7 @@ func SaveClient(user *Client) error {
 	return nil
 }
 
-func AuthenticateClient(user *Client) interface{} {
+func AuthenticateClient(user *Client) bool {
 	// Authenticate the client
 	// For now, we will just print the client to the console
 	println("Authenticating client:")
@@ -36,5 +36,4 @@ func AuthenticateClient(user *Client) interface{} {
 	println("City:", user.City)
 	println("Address:", user.Address)
 	return true
-
 }

@@ -13,7 +13,9 @@ type PageData struct {
 	Body  string
 }
 
-func Start() {
+func Start(port string) {
+	println("Server started on :" + port)
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		tmpl := template.Must(template.ParseFiles("./web/index.html"))
 
@@ -28,9 +30,9 @@ func Start() {
 	http.HandleFunc("/auth/register-client", controller.RegisterClient)
 	http.HandleFunc("/auth/login-client", controller.LoginClient)
 
-	err := http.ListenAndServe(":8082", nil)
+	err := http.ListenAndServe(":"+port, nil)
 	if err != nil {
 		log.Fatalf("error starting server: %v", err)
 	}
-	println("Server started on :8082")
+	println("Server started on :" + port)
 }

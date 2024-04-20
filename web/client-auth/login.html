@@ -14,11 +14,20 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ email, password })
-            }).then(response => response.json())
-                .then(data => console.log(data))
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
+            }).then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                // Display the token
+                document.getElementById('token').innerText = 'Token: ' + data.token;
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
         }
     </script>
 </head>
@@ -31,5 +40,6 @@
     <input type="password" id="password" name="password" required><br>
     <input type="submit" value="Login">
 </form>
+<p id="token"></p>
 </body>
 </html>

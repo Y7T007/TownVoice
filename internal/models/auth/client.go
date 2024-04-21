@@ -44,6 +44,7 @@ func SaveClient(user *Client) error {
 
 	return nil
 }
+
 func AuthenticateClient(user *Client) bool {
 	// Connect to the ipfs daemon
 	sh := shell.NewShell("localhost:5001")

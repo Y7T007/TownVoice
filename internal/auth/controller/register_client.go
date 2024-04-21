@@ -1,11 +1,10 @@
-// internal/auth/controller/register_client.go
 package controller
 
 import (
 	"TownVoice/internal/models/auth"
 	"encoding/json"
 	"html/template"
-	"log" // Make sure to import the log package
+	"log"
 	"net/http"
 )
 
@@ -15,18 +14,18 @@ func RegisterClient(w http.ResponseWriter, r *http.Request) {
 		tmpl.Execute(w, nil)
 	} else if r.Method == "POST" {
 		// Parse and decode the request body into a new 'Client' type instance
-		user := &auth.Client{}
-		err := json.NewDecoder(r.Body).Decode(user)
+		client := &auth.Client{}
+		err := json.NewDecoder(r.Body).Decode(client)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
 		// Log the received form data
-		log.Printf("Received form data from the view  : %+v\n", user)
+		log.Printf("Received form data from the view  : %+v\n", client)
 
-		// Save the user to the database (or in this case, IPFS)
-		err = auth.SaveClient(user)
+		// Save the client to the IPFS database
+		err = auth.SaveClient(client)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return

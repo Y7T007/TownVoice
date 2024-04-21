@@ -23,7 +23,7 @@ func RegisterClient(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// Log the received form data
-		log.Printf("Received form data: %+v\n", user)
+		log.Printf("Received form data from the view  : %+v\n", user)
 
 		// Save the user to the database (or in this case, IPFS)
 		err = auth.SaveClient(user)

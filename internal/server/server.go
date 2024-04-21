@@ -4,7 +4,6 @@ import (
 	"TownVoice/internal/auth/controller"
 	"TownVoice/internal/handlers"
 	"html/template"
-	"log"
 	"net/http"
 )
 
@@ -13,10 +12,10 @@ type PageData struct {
 	Body  string
 }
 
-func Start(port string) {
-	println("Server started on :" + port)
+func SetupRouter() *http.ServeMux {
+	mux := http.NewServeMux()
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		tmpl := template.Must(template.ParseFiles("./web/index.html"))
 
 		data := PageData{
@@ -26,13 +25,9 @@ func Start(port string) {
 
 		tmpl.Execute(w, data)
 	})
-	http.HandleFunc("/login", handlers.LoginHandler)
-	http.HandleFunc("/auth/register-client", controller.RegisterClient)
-	http.HandleFunc("/auth/login-client", controller.LoginClient)
+	mux.HandleFunc("/login", handlers.LoginHandler)
+	mux.HandleFunc("/auth/register-client", controller.RegisterClient)
+	mux.HandleFunc("/auth/login-client", controller.LoginClient)
 
-	err := http.ListenAndServe(":"+port, nil)
-	if err != nil {
-		log.Fatalf("error starting server: %v", err)
-	}
-	println("Server started on :" + port)
+	return mux
 }

@@ -4,8 +4,10 @@ import (
 	"TownVoice/internal/ipfs"
 	"TownVoice/internal/server"
 	"context"
+	firebase "firebase.google.com/go"
 	"fmt"
 	"github.com/joho/godotenv"
+	"google.golang.org/api/option"
 	"log"
 	"net/http"
 	"os"
@@ -24,6 +26,13 @@ func main() {
 		log.Printf("error adding file to IPFS: %v", err) // Log the error and continue
 	} else {
 		fmt.Println("added file:", cid)
+	}
+
+	// Initialize Firebase
+	opt := option.WithCredentialsFile(os.Getenv("FIREBASE_CREDENTIALS_PATH"))
+	_, err = firebase.NewApp(context.Background(), nil, opt)
+	if err != nil {
+		log.Fatalf("error initializing app: %v", err)
 	}
 
 	srv := &http.Server{

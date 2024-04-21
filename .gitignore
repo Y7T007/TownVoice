@@ -19,3 +19,9 @@
 
 # Environment files
 .env
+
+
+#config files
+
+pringles.json
+./internal/config/pringles.json

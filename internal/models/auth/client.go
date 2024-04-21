@@ -40,7 +40,7 @@ func SaveClient(user *Client) error {
 	// Store the CID in the user object
 	user.CID = cid
 
-	log.Printf("Added client %s to IPFS with CID %s", user.Email, cid)
+	log.Printf("Addiiiing client %s to IPFS with CID %s", user.Email, cid)
 
 	return nil
 }

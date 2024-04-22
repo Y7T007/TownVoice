@@ -3,6 +3,8 @@ package server
 import (
 	"TownVoice/internal/auth/controller"
 	"TownVoice/internal/handlers"
+	"TownVoice/internal/routes"
+
 	"encoding/json"
 	"fmt"
 	"html/template"
@@ -61,6 +63,8 @@ func SetupRouter() *http.ServeMux {
 	mux.HandleFunc("/auth/login-client", controller.LoginClient)
 	mux.Handle("/get_number", Middleware(http.HandlerFunc(getNumberHandler)))
 	mux.Handle("/verifytoken", Middleware(http.HandlerFunc(gettoken)))
+
+	routes.CommentRoutes(mux)
 
 	return mux
 }

@@ -1,0 +1,14 @@
+{
+  "type": "service_account",
+  "project_id": "townvoice-485fb",
+  "private_key_id": "54dee21f655169f7c6ed6d1c638703d86786c1c1",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEuwIBADANBgkqhkiG9w0BAQEFAASCBKUwggShAgEAAoIBAQCmNTlrrees1TEx\nyEwcI3bYejTyYKq3XquwVHFlWBA5Ju/iOIHlSWLdJC836Iw1DKvsXQS+J4VdIORV\nLF8KwkVJKU7a0ElxNys5JbxowzDHJn3VWyMJ2MhO4XjTInMW4dmwSno9C0P2jYK9\nzQEvmYdvzRiGvNssJ2WlZU/OG8dQv+qgBRp8TQrOwlPU5sNoVWnCeXDxLjH95R/G\nKZ+mfqHPWRzJrdQ2GgVx34yPKySaCpv0NOEds35n1DwJyEk3yOmp9d4GuUnaMecR\nevvkKkggd8jumfj308HGD5cYBxrOo3aQuziwV+N7VSl0aY+7TJeTI/6y2mJR3OBz\nojewedo7AgMBAAECggEAMOvVnOYxHOQbeMW18UpW/tzpnLXrSdHpwxr3zZagH9Jg\nJTvwr+Zr3R97bn9aVXsHV6kBbl7/mCvISXGn/+iysBgih7FrDJHqfQWocUWSo+um\nehg7NfjC7MTc5XhsW73ab1Ncq38XYAjDBM7EnJgaD0RVBcOs11A5UPeDB+2ROyjn\n+O94Xq3D2UhZAiZxPFuPtJ191N74l9Vdw/QNlN9RyttO7P6uAbkNGTXQT9pnYeXA\nX4SeMRdtEz4DAYOWzTKDsUi0Jx3vB8Iq2+y/KJVzCD9Dr7Kmx80K7EtMSt9tgZnb\no6C26NonjevKxR6RTPHP7E29UlOy9LPwoRbhvhbwIQKBgQDkq+YK/C/kDfumxmYr\nymVJTHqbVPU+no8OP8nLtckupfOhabc/WncApij0MPUL8/+dL0uFXqhGO8Koigez\nUTg6QhbZzow2BzA8tjFxNqD0AZUJAIHSwaq+R5Zh0FgysUT9oCRf0m/tzHdnMEif\nXSvtsH9tXm26gNX9W3VnKkD1wwKBgQC6Ekfdfiyr7Zpz55J2nUOMWlKRvKV9MhUL\nlqWqrmu7sweocIfjEpd9DiLroq5KLCVZGibwtInFSdWqwZ9MIRmUCxnJ2vwvReRa\nyB2gXyz3dzbjuQgqG3YHlyDXWD/ShbBCWWZftQsfbtriFAQwJ7pOIJIFBs0laLsC\n/Av4grWqKQJ/U/bKgT4YV6TKwnIXEf0/M6rhWifX5SZTYOgLMMGPHZHR43Lt1lVh\nXNumLgPL9pehRBYZpN8c6q0GzNvh9/Xar4mU2mT9FtmM3L4JaYilkPMDxkppYPm7\nuCKRFVlrCTIOIxKqSIT8lFR/g2Q3Rkzv1Fb6cy45HEIyUNVERp09PQKBgAtLVMVj\nBT8iWv+yDLfab+EzElP6SWlCAvkDGec0UyG/ijV1LypfVIaotwHqi/3AlDvGVJrD\nuqEZDDkjK5IpaC4ORnB0NF6CNYw1HWdAn7Adsl08O/yiUhW/3KR1nNogd0RvvMEO\ncjBkQDD82gw6PRrE61gWw5kDtGZH+koJVRGRAoGBAMk0o90j+4yLYsN4NkO0iZjx\ndaFF/vvR/XOpTjsxhEjDfVpYAXLCriGEwPEBIzcQ2lFB4scb1zZmISbJp1qTRWCD\nY0+qCyyBRYAULrk71C1N9jRs2l9aR8jkYgSBNIoqLj5rXq5nZ0dfkWcryfVbglmE\ngedqtiXoLA4krio31h0Q\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-de54r@townvoice-485fb.iam.gserviceaccount.com",
+  "client_id": "103578467642679418382",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-de54r%40townvoice-485fb.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
+

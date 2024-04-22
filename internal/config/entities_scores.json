@@ -1,0 +1,573 @@
+{
+  "General": {
+    "cleanliness": {},
+    "staff friendliness": {},
+    "value for money": {},
+    "overall experience": {}
+  },
+  "Accounting": {
+    "accuracy": {},
+    "timeliness": {},
+    "communication": {},
+    "professionalism": {}
+  },
+  "Airport": {
+    "security": {},
+    "food options": {},
+    "cleanliness": {},
+    "signage": {},
+    "waiting areas": {}
+  },
+  "Amusement Park": {
+    "variety of attractions": {},
+    "wait times": {},
+    "food options": {},
+    "value for money": {}
+  },
+  "Aquarium": {
+    "variety of exhibits": {},
+    "educational value": {},
+    "cleanliness": {},
+    "value for money": {}
+  },
+  "Art Gallery": {
+    "variety of exhibits": {},
+    "educational value": {},
+    "ambiance": {},
+    "value for money": {}
+  },
+  "ATM": {
+    "ease of use": {},
+    "availability": {},
+    "security": {},
+    "location": {}
+  },
+  "Bakery": {
+    "taste": {},
+    "variety": {},
+    "freshness": {},
+    "value for money": {}
+  },
+  "Bank": {
+    "customer service": {},
+    "wait times": {},
+    "range of services": {},
+    "online banking experience": {}
+  },
+  "Bar": {
+    "drink selection": {},
+    "ambiance": {},
+    "service": {},
+    "value for money": {}
+  },
+  "Beauty Salon": {
+    "quality of service": {},
+    "professionalism": {},
+    "ambiance": {},
+    "value for money": {}
+  },
+  "Bicycle Store": {
+    "variety of products": {},
+    "customer service": {},
+    "repair services": {},
+    "value for money": {}
+  },
+  "Book Store": {
+    "variety of books": {},
+    "ambiance": {},
+    "customer service": {},
+    "value for money": {}
+  },
+  "Bowling Alley": {
+    "cleanliness": {},
+    "wait times": {},
+    "food options": {},
+    "value for money": {}
+  },
+  "Bus Station": {
+    "cleanliness": {},
+    "security": {},
+    "signage": {},
+    "waiting areas": {}
+  },
+  "Cafe": {
+    "taste": {},
+    "service": {},
+    "ambiance": {},
+    "value for money": {}
+  },
+  "Campground": {
+    "cleanliness": {},
+    "facilities": {},
+    "location": {},
+    "value for money": {}
+  },
+  "Car Dealer": {
+    "variety of cars": {},
+    "customer service": {},
+    "pricing": {},
+    "value for money": {}
+  },
+  "Car Rental": {
+    "variety of cars": {},
+    "customer service": {},
+    "pricing": {},
+    "value for money": {}
+  },
+  "Car Repair": {
+    "quality of service": {},
+    "pricing": {},
+    "timeliness": {},
+    "customer service": {}
+  },
+  "Car Wash": {
+    "quality of service": {},
+    "pricing": {},
+    "timeliness": {},
+    "customer service": {}
+  },
+  "Casino": {
+    "variety of games": {},
+    "ambiance": {},
+    "service": {},
+    "value for money": {}
+  },
+  "Cemetery": {
+    "cleanliness": {},
+    "maintenance": {},
+    "security": {},
+    "location": {}
+  },
+  "Church": {
+    "ambiance": {},
+    "community": {},
+    "services": {},
+    "location": {}
+  },
+  "City Hall": {
+    "customer service": {},
+    "cleanliness": {},
+    "services": {},
+    "location": {}
+  },
+  "Clothing Store": {
+    "variety of clothes": {},
+    "pricing": {},
+    "customer service": {},
+    "value for money": {}
+  },
+  "Convenience Store": {
+    "variety of products": {},
+    "pricing": {},
+    "location": {},
+    "value for money": {}
+  },
+  "Courthouse": {
+    "customer service": {},
+    "cleanliness": {},
+    "services": {},
+    "location": {}
+  },
+  "Dentist": {
+    "quality of service": {},
+    "professionalism": {},
+    "cleanliness": {},
+    "value for money": {}
+  },
+  "Department Store": {
+    "variety of products": {},
+    "pricing": {},
+    "customer service": {},
+    "value for money": {}
+  },
+  "Doctor": {
+    "quality of service": {},
+    "professionalism": {},
+    "cleanliness": {},
+    "value for money": {}
+  },
+  "Drugstore": {
+    "variety of products": {},
+    "pricing": {},
+    "customer service": {},
+    "value for money": {}
+  },
+  "Electrician": {
+    "quality of service": {},
+    "professionalism": {},
+    "timeliness": {},
+    "value for money": {}
+  },
+  "Electronics Store": {
+    "variety of products": {},
+    "pricing": {},
+    "customer service": {},
+    "value for money": {}
+  },
+  "Embassy": {
+    "customer service": {},
+    "cleanliness": {},
+    "services": {},
+    "location": {}
+  },
+  "Fire Station": {
+    "response time": {},
+    "professionalism": {},
+    "community involvement": {},
+    "location": {}
+  },
+  "Florist": {
+    "variety of flowers": {},
+    "freshness": {},
+    "customer service": {},
+    "value for money": {}
+  },
+  "Funeral Home": {
+    "professionalism": {},
+    "services": {},
+    "ambiance": {},
+    "value for money": {}
+  },
+  "Furniture Store": {
+    "variety of products": {},
+    "pricing": {},
+    "customer service": {},
+    "value for money": {}
+  },
+  "Gas Station": {
+    "pricing": {},
+    "location": {},
+    "convenience store options": {},
+    "service": {}
+  },
+  "Gym": {
+    "cleanliness": {},
+    "variety of equipment": {},
+    "classes": {},
+    "value for money": {}
+  },
+  "Hair Care": {
+    "quality of service": {},
+    "professionalism": {},
+    "ambiance": {},
+    "value for money": {}
+  },
+  "Hardware Store": {
+    "variety of products": {},
+    "pricing": {},
+    "customer service": {},
+    "value for money": {}
+  },
+  "Hindu Temple": {
+    "ambiance": {},
+    "community": {},
+    "services": {},
+    "location": {}
+  },
+  "Home Goods Store": {
+    "variety of products": {},
+    "pricing": {},
+    "customer service": {},
+    "value for money": {}
+  },
+  "Hospital": {
+    "quality of service": {},
+    "professionalism": {},
+    "cleanliness": {},
+    "value for money": {}
+  },
+  "Insurance Agency": {
+    "customer service": {},
+    "pricing": {},
+    "range of services": {},
+    "value for money": {}
+  },
+  "Jewelry Store": {
+    "variety of products": {},
+    "pricing": {},
+    "customer service": {},
+    "value for money": {}
+  },
+  "Laundry": {
+    "quality of service": {},
+    "pricing": {},
+    "timeliness": {},
+    "location": {}
+  },
+  "Lawyer": {
+    "professionalism": {},
+    "communication": {},
+    "pricing": {},
+    "value for money": {}
+  },
+  "Library": {
+    "variety of books": {},
+    "ambiance": {},
+    "services": {},
+    "location": {}
+  },
+  "Light Rail Station": {
+    "cleanliness": {},
+    "security": {},
+    "signage": {},
+    "waiting areas": {}
+  },
+  "Liquor Store": {
+    "variety of products": {},
+    "pricing": {},
+    "customer service": {},
+    "value for money": {}
+  },
+  "Local Government Office": {
+    "customer service": {},
+    "cleanliness": {},
+    "services": {},
+    "location": {}
+  },
+  "Locksmith": {
+    "quality of service": {},
+    "professionalism": {},
+    "timeliness": {},
+    "value for money": {}
+  },
+  "Lodging": {
+    "cleanliness": {},
+    "service": {},
+    "amenities": {},
+    "value for money": {}
+  },
+  "Meal Delivery": {
+    "taste": {},
+    "timeliness": {},
+    "pricing": {},
+    "value for money": {}
+  },
+  "Meal Takeaway": {
+    "taste": {},
+    "service": {},
+    "pricing": {},
+    "value for money": {}
+  },
+  "Mosque": {
+    "ambiance": {},
+    "community": {},
+    "services": {},
+    "location": {}
+  },
+  "Movie Rental": {
+    "variety of movies": {},
+    "pricing": {},
+    "customer service": {},
+    "value for money": {}
+  },
+  "Movie Theater": {
+    "cleanliness": {},
+    "variety of movies": {},
+    "concessions": {},
+    "value for money": {}
+  },
+  "Moving Company": {
+    "quality of service": {},
+    "professionalism": {},
+    "pricing": {},
+    "value for money": {}
+  },
+  "Museum": {
+    "variety of exhibits": {},
+    "educational value": {},
+    "cleanliness": {},
+    "value for money": {}
+  },
+  "Night Club": {
+    "music": {},
+    "ambiance": {},
+    "service": {},
+    "value for money": {}
+  },
+  "Painter": {
+    "quality of service": {},
+    "professionalism": {},
+    "timeliness": {},
+    "value for money": {}
+  },
+  "Park": {
+    "cleanliness": {},
+    "facilities": {},
+    "location": {},
+    "value for money": {}
+  },
+  "Parking": {
+    "availability": {},
+    "pricing": {},
+    "location": {},
+    "security": {}
+  },
+  "Pet Store": {
+    "variety of products": {},
+    "pricing": {},
+    "customer service": {},
+    "value for money": {}
+  },
+  "Pharmacy": {
+    "variety of products": {},
+    "pricing": {},
+    "customer service": {},
+    "value for money": {}
+  },
+  "Physiotherapist": {
+    "quality of service": {},
+    "professionalism": {},
+    "cleanliness": {},
+    "value for money": {}
+  },
+  "Plumber": {
+    "quality of service": {},
+    "professionalism": {},
+    "timeliness": {},
+    "value for money": {}
+  },
+  "Police": {
+    "response time": {},
+    "professionalism": {},
+    "community involvement": {},
+    "location": {}
+  },
+  "Post Office": {
+    "customer service": {},
+    "cleanliness": {},
+    "services": {},
+    "location": {}
+  },
+  "Real Estate Agency": {
+    "customer service": {},
+    "pricing": {},
+    "range of services": {},
+    "value for money": {}
+  },
+  "Restaurant": {
+    "taste": {},
+    "service": {},
+    "ambiance": {},
+    "value for money": {}
+  },
+  "Roofing Contractor": {
+    "quality of service": {},
+    "professionalism": {},
+    "pricing": {},
+    "value for money": {}
+  },
+  "RV Park": {
+    "cleanliness": {},
+    "facilities": {},
+    "location": {},
+    "value for money": {}
+  },
+  "School": {
+    "quality of education": {},
+    "facilities": {},
+    "teachers": {},
+    "value for money": {}
+  },
+  "Shoe Store": {
+    "variety of shoes": {},
+    "pricing": {},
+    "customer service": {},
+    "value for money": {}
+  },
+  "Shopping Mall": {
+    "variety of stores": {},
+    "cleanliness": {},
+    "food options": {},
+    "value for money": {}
+  },
+  "Spa": {
+    "quality of service": {},
+    "ambiance": {},
+    "cleanliness": {},
+    "value for money": {}
+  },
+  "Stadium": {
+    "cleanliness": {},
+    "food options": {},
+    "seating": {},
+    "value for money": {}
+  },
+  "Storage": {
+    "availability": {},
+    "pricing": {},
+    "location": {},
+    "security": {}
+  },
+  "Store": {
+    "variety of products": {},
+    "pricing": {},
+    "customer service": {},
+    "value for money": {}
+  },
+  "Subway Station": {
+    "cleanliness": {},
+    "security": {},
+    "signage": {},
+    "waiting areas": {}
+  },
+  "Supermarket": {
+    "variety of products": {},
+    "pricing": {},
+    "customer service": {},
+    "value for money": {}
+  },
+  "Synagogue": {
+    "ambiance": {},
+    "community": {},
+    "services": {},
+    "location": {}
+  },
+  "Taxi Stand": {
+    "availability": {},
+    "pricing": {},
+    "location": {},
+    "service": {}
+  },
+  "Tourist Attraction": {
+    "cleanliness": {},
+    "educational value": {},
+    "food options": {},
+    "value for money": {}
+  },
+  "Train Station": {
+    "cleanliness": {},
+    "security": {},
+    "signage": {},
+    "waiting areas": {}
+  },
+  "Transit Station": {
+    "cleanliness": {},
+    "security": {},
+    "signage": {},
+    "waiting areas": {}
+  },
+  "Travel Agency": {
+    "customer service": {},
+    "pricing": {},
+    "range of services": {},
+    "value for money": {}
+  },
+  "University": {
+    "quality of education": {},
+    "facilities": {},
+    "professors": {},
+    "value for money": {}
+  },
+  "Veterinary Care": {
+    "quality of service": {},
+    "professionalism": {},
+    "cleanliness": {},
+    "value for money": {}
+  },
+  "Zoo": {
+    "variety of animals": {},
+    "educational value": {},
+    "cleanliness": {},
+    "value for money": {}
+  }
+}

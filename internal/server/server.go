@@ -4,6 +4,7 @@ import (
 	"TownVoice/internal/auth/controller"
 	"TownVoice/internal/handlers"
 	"TownVoice/internal/routes"
+	"TownVoice/utils"
 
 	"encoding/json"
 	"fmt"
@@ -34,7 +35,7 @@ func gettoken(w http.ResponseWriter, r *http.Request) {
 
 	idToken := strings.TrimPrefix(authorizationHeader, "Bearer ")
 
-	token, err := verifyIDToken(r.Context(), idToken)
+	token, err := utils.VerifyIDToken(r.Context(), idToken)
 	if err != nil {
 		http.Error(w, "Invalid ID token", http.StatusUnauthorized)
 		return
@@ -61,8 +62,8 @@ func SetupRouter() *http.ServeMux {
 	mux.HandleFunc("/login", handlers.LoginHandler)
 	mux.HandleFunc("/auth/register-client", controller.RegisterClient)
 	mux.HandleFunc("/auth/login-client", controller.LoginClient)
-	mux.Handle("/get_number", Middleware(http.HandlerFunc(getNumberHandler)))
-	mux.Handle("/verifytoken", Middleware(http.HandlerFunc(gettoken)))
+	mux.Handle("/get_number", utils.Middleware(http.HandlerFunc(getNumberHandler)))
+	mux.Handle("/verifytoken", utils.Middleware(http.HandlerFunc(gettoken)))
 
 	routes.CommentRoutes(mux)
 

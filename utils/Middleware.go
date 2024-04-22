@@ -1,4 +1,4 @@
-package server
+package utils
 
 import (
 	"context"
@@ -13,7 +13,7 @@ import (
 	"google.golang.org/api/option"
 )
 
-func verifyIDToken(ctx context.Context, idToken string) (*auth.Token, error) {
+func VerifyIDToken(ctx context.Context, idToken string) (*auth.Token, error) {
 	opt := option.WithCredentialsFile(os.Getenv("FIREBASE_CREDENTIALS_PATH"))
 	app, err := firebase.NewApp(ctx, nil, opt)
 	if err != nil {
@@ -42,7 +42,7 @@ func Middleware(next http.Handler) http.Handler {
 		}
 
 		idToken := strings.TrimPrefix(authorizationHeader, "Bearer ")
-		token, err := verifyIDToken(r.Context(), idToken)
+		token, err := VerifyIDToken(r.Context(), idToken)
 		if err != nil {
 			http.Error(w, "Invalid ID token", http.StatusUnauthorized)
 			return

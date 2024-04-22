@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"TownVoice/internal/facade"
 	"TownVoice/utils"
 	"encoding/json"
 	"fmt"
@@ -36,7 +37,7 @@ func AddComment(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("User with UID %s and name %s added a comment on entity %s: %s\n", uid, name, entityId, comment)
 
 	// Implement your logic here to actually add the comment
-	// ...
+	facade.AddComment(entityId, comment, uid)
 
 	// After the comment is added successfully, write a success status and message back to the client
 	w.WriteHeader(http.StatusOK)

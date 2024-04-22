@@ -86,7 +86,7 @@ func GetCommentsByEntity(w http.ResponseWriter, r *http.Request) {
 	// Call the GetCommentsByEntity function from the commentsFacade package
 	comments, err := facade.GetCommentsByEntity(entityId)
 	if err != nil {
-		http.Error(w, "Error getting comments", http.StatusInternalServerError)
+		http.Error(w, "No Comment was found for this entity : "+entityId, http.StatusInternalServerError)
 		return
 	}
 

@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"TownVoice/utils"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"strings"
@@ -35,6 +36,14 @@ func AddComment(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("User with UID %s and name %s added a comment on entity %s: %s\n", uid, name, entityId, comment)
 
 	// Implement your logic here to actually add the comment
+	// ...
+
+	// After the comment is added successfully, write a success status and message back to the client
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(map[string]string{
+		"status":  "success",
+		"message": "Comment has been added successfully",
+	})
 }
 
 func GetCommentsByEntity(w http.ResponseWriter, r *http.Request) {

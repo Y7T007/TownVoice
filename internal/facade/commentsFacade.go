@@ -6,14 +6,72 @@ import (
 	"cloud.google.com/go/firestore"
 	"context"
 	"encoding/json"
+	"fmt"
+	"io/ioutil"
 	"log"
 	"strings"
 	"time"
 )
 
-func GetCommentsByEntity(entityID string) {
+func GetCommentsByEntity(entityID string) ([]models.Comment, error) {
+	// Get a new FirestoreRepo
+	firestoreRepo := databasesRepo.NewFirestoreRepo()
+	ctx := context.Background()
 
-	//	print that its received
+	// Fetch existing document
+	docRef := firestoreRepo.Client.Collection("Comments").Doc(entityID)
+	docSnap, err := docRef.Get(ctx)
+	if err != nil {
+		log.Printf("Failed to fetch document: %v", err)
+		return nil, fmt.Errorf("failed to fetch document: %v", err)
+	}
+
+	// Extract existing cids from the document
+	var existingCids []string
+	if docSnap.Exists() {
+		data := docSnap.Data()
+		if data != nil {
+			if cidList, ok := data["cids"].([]interface{}); ok {
+				for _, c := range cidList {
+					if cid, ok := c.(string); ok {
+						existingCids = append(existingCids, cid)
+					}
+				}
+			}
+		}
+	}
+
+	// Get a new IPFSRepo
+	ipfsRepo := databasesRepo.NewIPFSRepo()
+
+	// Fetch each comment from IPFS using the cids
+	var comments []models.Comment
+	for _, cid := range existingCids {
+		commentReader, err := ipfsRepo.Shell.Cat(cid)
+		if err != nil {
+			log.Printf("Failed to fetch comment from IPFS: %v", err)
+			continue
+		}
+
+		// Read the data from the io.ReadCloser into a byte slice
+		commentJSON, err := ioutil.ReadAll(commentReader)
+		if err != nil {
+			log.Printf("Failed to read comment data: %v", err)
+			continue
+		}
+
+		// Convert the comment JSON to a Comment object
+		var comment models.Comment
+		err = json.Unmarshal(commentJSON, &comment)
+		if err != nil {
+			log.Printf("Failed to convert comment JSON to Comment object: %v", err)
+			continue
+		}
+
+		comments = append(comments, comment)
+	}
+
+	return comments, nil
 }
 
 func GetCommentsByUser(userID string) {

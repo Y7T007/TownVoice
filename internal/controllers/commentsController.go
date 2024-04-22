@@ -58,7 +58,41 @@ func AddComment(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetCommentsByEntity(w http.ResponseWriter, r *http.Request) {
-	// Implement your logic here
+	// Get the user's JWT from the Authorization header
+	authorizationHeader := r.Header.Get("Authorization")
+	if authorizationHeader == "" {
+		http.Error(w, "Authorization header not provided", http.StatusUnauthorized)
+		return
+	}
+
+	// Trim the "Bearer " prefix from the JWT
+	idToken := strings.TrimPrefix(authorizationHeader, "Bearer ")
+
+	// Get the user's Firebase UID and other claims from the token
+	token, err := utils.VerifyIDToken(r.Context(), idToken)
+	if err != nil {
+		http.Error(w, "Invalid ID token", http.StatusUnauthorized)
+		return
+	}
+	uid := token.UID
+	name := token.Claims["name"]
+
+	// Get the entity ID from the URL
+	entityId := strings.TrimPrefix(r.URL.Path, "/comments/get-comments-by-entity/")
+
+	// Log the user's UID, name, and entity ID
+	fmt.Printf("User with UID %s and name %s requested comments on entity %s\n", uid, name, entityId)
+
+	// Call the GetCommentsByEntity function from the commentsFacade package
+	comments, err := facade.GetCommentsByEntity(entityId)
+	if err != nil {
+		http.Error(w, "Error getting comments", http.StatusInternalServerError)
+		return
+	}
+
+	// Write the comments back to the client
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(comments)
 }
 
 func GetCommentsByUser(w http.ResponseWriter, r *http.Request) {

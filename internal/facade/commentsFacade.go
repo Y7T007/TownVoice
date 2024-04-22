@@ -7,6 +7,8 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 	"io/ioutil"
 	"log"
 	"strings"
@@ -118,34 +120,39 @@ func AddComment(entityID string, comment string, uid string) {
 	// Fetch existing document
 	docRef := firestoreRepo.Client.Collection("Comments").Doc(entityID)
 	docSnap, err := docRef.Get(ctx)
-	if err != nil {
+	if status.Code(err) == codes.NotFound {
+		// If the document does not exist, create a new one
+		_, err = docRef.Create(ctx, map[string]interface{}{"cids": []string{cid}})
+		if err != nil {
+			log.Fatalf("Failed to create new document: %v", err)
+		}
+	} else if err != nil {
 		log.Fatalf("Failed to fetch document: %v", err)
-	}
-
-	// Extract existing cids from the document
-	var existingCids []string
-	if docSnap.Exists() {
-		data := docSnap.Data()
-		if data != nil {
-			if cidList, ok := data["cids"].([]interface{}); ok {
-				for _, c := range cidList {
-					if cid, ok := c.(string); ok {
-						existingCids = append(existingCids, cid)
+	} else {
+		// Extract existing cids from the document
+		var existingCids []string
+		if docSnap.Exists() {
+			data := docSnap.Data()
+			if data != nil {
+				if cidList, ok := data["cids"].([]interface{}); ok {
+					for _, c := range cidList {
+						if cid, ok := c.(string); ok {
+							existingCids = append(existingCids, cid)
+						}
 					}
 				}
 			}
 		}
+
+		// Append the new cid to existing cids
+		existingCids = append(existingCids, cid)
+
+		// Update the Firestore document with the new cids
+		_, err = docRef.Set(ctx, map[string]interface{}{"cids": existingCids}, firestore.MergeAll)
+		if err != nil {
+			log.Fatalf("Failed to update Firestore document: %v", err)
+		}
 	}
-
-	// Append the new cid to existing cids
-	existingCids = append(existingCids, cid)
-
-	// Update the Firestore document with the new cids
-	_, err = docRef.Set(ctx, map[string]interface{}{"cids": existingCids}, firestore.MergeAll)
-	if err != nil {
-		log.Fatalf("Failed to update Firestore document: %v", err)
-	}
-
 	// Print the CID of the new IPFS object
 	log.Printf("Added CID to Firestore with CID %s\n", cid)
 }

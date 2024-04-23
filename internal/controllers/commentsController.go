@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"TownVoice/internal/facade"
+	"TownVoice/internal/models"
 	"TownVoice/utils"
 	"encoding/json"
 	"fmt"
@@ -43,7 +44,26 @@ func AddComment(w http.ResponseWriter, r *http.Request) {
 	// Get the comment from the request data
 	comment := requestData["comment"]
 
-	//Handling of the visitor pattern to detect sensitive content:
+	// Create a new Comment object
+	newComment := models.Comment{
+		UserID:   uid,
+		EntityID: entityId,
+		Content:  comment,
+	}
+
+	// Create a new BadWordDetector visitor
+	badWordDetector := &models.BadWordDetector{
+		BadWords: []string{"fuck", "badword2"},
+	}
+
+	// Use the visitor to check the comment for bad words
+	newComment.Accept(badWordDetector)
+
+	// If the comment content is empty, it means it contained bad words
+	if newComment.Content == "" {
+		http.Error(w, "Comment contains sensitive content", http.StatusBadRequest)
+		return
+	}
 
 	// Log the user's UID, name, entity ID, and comment
 	fmt.Printf("User with UID %s and name %s added a comment on entity %s: %s\n", uid, name, entityId, comment)

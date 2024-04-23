@@ -11,3 +11,7 @@ type Comment struct {
 	Content   string    `json:"content"`
 	Timestamp time.Time `json:"timestamp"`
 }
+
+func (c *Comment) Accept(v Visitor) {
+	v.VisitComment(c)
+}

@@ -9,6 +9,7 @@ import (
 	"strings"
 )
 
+// thats working
 func AddRating(w http.ResponseWriter, r *http.Request) {
 	// Get the user's JWT from the Authorization header
 	authorizationHeader := r.Header.Get("Authorization")
@@ -53,6 +54,7 @@ func AddRating(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+// Also workiiiinnnnnggggg
 func GetRatingsByEntity(w http.ResponseWriter, r *http.Request) {
 	// Get the user's JWT from the Authorization header
 	authorizationHeader := r.Header.Get("Authorization")

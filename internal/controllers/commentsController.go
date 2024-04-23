@@ -53,7 +53,7 @@ func AddComment(w http.ResponseWriter, r *http.Request) {
 
 	// Create a new BadWordDetector visitor
 	badWordDetector := &models.BadWordDetector{
-		BadWords: []string{"fuck", "badword2"},
+		BadWords: []string{"fuck", "YOU"},
 	}
 
 	// Use the visitor to check the comment for bad words

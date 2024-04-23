@@ -53,7 +53,7 @@ func AddComment(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Read the bad words from the JSON file
-	badWordsBytes, err := ioutil.ReadFile("./badwords.json")
+	badWordsBytes, err := ioutil.ReadFile("./internal/config/badWords.json")
 	if err != nil {
 		http.Error(w, "Failed to read bad words file", http.StatusInternalServerError)
 		return

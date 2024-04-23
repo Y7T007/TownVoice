@@ -52,15 +52,20 @@ func AddComment(w http.ResponseWriter, r *http.Request) {
 		Content:  comment,
 	}
 
-	// Read the bad words from the file
-	badWordsBytes, err := ioutil.ReadFile("./badwords.txt")
+	// Read the bad words from the JSON file
+	badWordsBytes, err := ioutil.ReadFile("./badwords.json")
 	if err != nil {
 		http.Error(w, "Failed to read bad words file", http.StatusInternalServerError)
 		return
 	}
 
-	// Split the bad words into a slice
-	badWords := strings.Split(string(badWordsBytes), "\n")
+	// Unmarshal the JSON into a slice
+	var badWords []string
+	err = json.Unmarshal(badWordsBytes, &badWords)
+	if err != nil {
+		http.Error(w, "Failed to parse bad words file", http.StatusInternalServerError)
+		return
+	}
 
 	// Create a new BadWordDetector visitor
 	badWordDetector := &models.BadWordDetector{
@@ -70,7 +75,6 @@ func AddComment(w http.ResponseWriter, r *http.Request) {
 	// Use the visitor to check the comment for bad words
 	newComment.Accept(badWordDetector)
 
-	// If the comment content is empty, it means it contained bad words
 	// If the comment content is empty, it means it contained bad words
 	if newComment.Content == "" {
 		w.WriteHeader(http.StatusBadRequest)

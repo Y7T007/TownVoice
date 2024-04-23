@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"TownVoice/internal/facade"
+	"TownVoice/internal/models"
 	"TownVoice/utils"
 	"encoding/json"
 	"fmt"
@@ -27,9 +28,8 @@ func AddComment(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	uid := token.UID
-	name := token.Claims["name"]
 
-	// Get the entity ID and comment from the URL
+	// Get the entity ID from the URL
 	entityId := strings.TrimPrefix(r.URL.Path, "/comments/add-comment/")
 
 	// Decode the request body into a map
@@ -43,10 +43,30 @@ func AddComment(w http.ResponseWriter, r *http.Request) {
 	// Get the comment from the request data
 	comment := requestData["comment"]
 
-	// Log the user's UID, name, entity ID, and comment
-	fmt.Printf("User with UID %s and name %s added a comment on entity %s: %s\n", uid, name, entityId, comment)
+	// Create a new Comment object
+	newComment := models.Comment{
+		UserID:   uid,
+		EntityID: entityId,
+		Content:  comment,
+	}
 
-	// Implement your logic here to actually add the comment
+	// Create a new BadWordDetector visitor
+	badWordDetector := models.NewBadWordDetector()
+
+	// Use the visitor to check the comment for bad words
+	newComment.Accept(badWordDetector)
+
+	// If the comment content is empty, it means it contained bad words
+	if newComment.Content == "" {
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(map[string]string{
+			"status":  "error",
+			"message": "Comment contains sensitive content",
+		})
+		return
+	}
+
+	// Call the AddComment function from the commentsFacade package
 	facade.AddComment(entityId, comment, uid)
 
 	// After the comment is added successfully, write a success status and message back to the client

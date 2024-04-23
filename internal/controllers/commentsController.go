@@ -6,7 +6,6 @@ import (
 	"TownVoice/utils"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"strings"
 )
@@ -29,9 +28,8 @@ func AddComment(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	uid := token.UID
-	name := token.Claims["name"]
 
-	// Get the entity ID and comment from the URL
+	// Get the entity ID from the URL
 	entityId := strings.TrimPrefix(r.URL.Path, "/comments/add-comment/")
 
 	// Decode the request body into a map
@@ -52,25 +50,8 @@ func AddComment(w http.ResponseWriter, r *http.Request) {
 		Content:  comment,
 	}
 
-	// Read the bad words from the JSON file
-	badWordsBytes, err := ioutil.ReadFile("./internal/config/badWords.json")
-	if err != nil {
-		http.Error(w, "Failed to read bad words file", http.StatusInternalServerError)
-		return
-	}
-
-	// Unmarshal the JSON into a slice
-	var badWords []string
-	err = json.Unmarshal(badWordsBytes, &badWords)
-	if err != nil {
-		http.Error(w, "Failed to parse bad words file", http.StatusInternalServerError)
-		return
-	}
-
 	// Create a new BadWordDetector visitor
-	badWordDetector := &models.BadWordDetector{
-		BadWords: badWords,
-	}
+	badWordDetector := models.NewBadWordDetector()
 
 	// Use the visitor to check the comment for bad words
 	newComment.Accept(badWordDetector)
@@ -85,10 +66,7 @@ func AddComment(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Log the user's UID, name, entity ID, and comment
-	fmt.Printf("User with UID %s and name %s added a comment on entity %s: %s\n", uid, name, entityId, comment)
-
-	// Implement your logic here to actually add the comment
+	// Call the AddComment function from the commentsFacade package
 	facade.AddComment(entityId, comment, uid)
 
 	// After the comment is added successfully, write a success status and message back to the client

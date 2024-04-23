@@ -60,8 +60,13 @@ func AddComment(w http.ResponseWriter, r *http.Request) {
 	newComment.Accept(badWordDetector)
 
 	// If the comment content is empty, it means it contained bad words
+	// If the comment content is empty, it means it contained bad words
 	if newComment.Content == "" {
-		http.Error(w, "Comment contains sensitive content", http.StatusBadRequest)
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(map[string]string{
+			"status":  "error",
+			"message": "Comment contains sensitive content",
+		})
 		return
 	}
 

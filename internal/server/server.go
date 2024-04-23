@@ -66,6 +66,7 @@ func SetupRouter() *http.ServeMux {
 	mux.Handle("/verifytoken", utils.Middleware(http.HandlerFunc(gettoken)))
 
 	routes.CommentRoutes(mux)
+	routes.RatingRoutes(mux)
 
 	return mux
 }

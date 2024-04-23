@@ -43,6 +43,8 @@ func AddComment(w http.ResponseWriter, r *http.Request) {
 	// Get the comment from the request data
 	comment := requestData["comment"]
 
+	//Handling of the visitor pattern to detect sensitive content:
+
 	// Log the user's UID, name, entity ID, and comment
 	fmt.Printf("User with UID %s and name %s added a comment on entity %s: %s\n", uid, name, entityId, comment)
 

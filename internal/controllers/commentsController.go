@@ -6,6 +6,7 @@ import (
 	"TownVoice/utils"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"strings"
 )
@@ -51,9 +52,19 @@ func AddComment(w http.ResponseWriter, r *http.Request) {
 		Content:  comment,
 	}
 
+	// Read the bad words from the file
+	badWordsBytes, err := ioutil.ReadFile("./badwords.txt")
+	if err != nil {
+		http.Error(w, "Failed to read bad words file", http.StatusInternalServerError)
+		return
+	}
+
+	// Split the bad words into a slice
+	badWords := strings.Split(string(badWordsBytes), "\n")
+
 	// Create a new BadWordDetector visitor
 	badWordDetector := &models.BadWordDetector{
-		BadWords: []string{"fuck", "YOU"},
+		BadWords: badWords,
 	}
 
 	// Use the visitor to check the comment for bad words

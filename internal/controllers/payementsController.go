@@ -33,14 +33,6 @@ func GenerateQRCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Now you have the entity type and elements in the qrRequest object
-	// You can use these to generate the QR code
-
-	// Implement your QR code generation logic here
-	// For example, you might call a function from your QR code service to generate the QR code,
-	// and then write the QR code or a link to the QR code back to the client.
-
-	// Don't forget to handle errors appropriately!
 }
 func ProcessPayment(w http.ResponseWriter, r *http.Request) {
 	// Implement your payment processing logic here

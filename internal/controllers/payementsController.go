@@ -1,11 +1,11 @@
 package controllers
 
 import (
-	"TownVoice/internal/repositories/databasesRepo"
-	"cloud.google.com/go/firestore"
 	"encoding/json"
+	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 )
 
 type QRRequest struct {
@@ -28,36 +28,36 @@ func GenerateQRCode(w http.ResponseWriter, r *http.Request) {
 	// Log the received JSON
 	log.Printf("Received JSON: %+v\n", qrRequest)
 
-	// Create a new FirestoreRepo
-	firestoreRepo := databasesRepo.NewFirestoreRepo()
-
-	// Get a reference to a document named after the entity_id
-	docRef := firestoreRepo.Client.Collection("transactions").Doc(qrRequest.EntityID)
-
-	// Get the current data in the document (if it exists)
-	doc, err := docRef.Get(r.Context())
-	if err != nil && !doc.Exists() {
-		// If the document doesn't exist, create it with the transaction_id as the first item in an array
-		_, err = docRef.Set(r.Context(), map[string][]string{
-			"transaction_ids": {qrRequest.TransactionID},
-		})
-		if err != nil {
-			http.Error(w, "Failed to create document", http.StatusInternalServerError)
-			return
-		}
-	} else {
-		// If the document exists, append the transaction_id to the existing array
-		_, err = docRef.Update(r.Context(), []firestore.Update{
-			{
-				Path:  "transaction_ids",
-				Value: firestore.ArrayUnion(qrRequest.TransactionID),
-			},
-		})
-		if err != nil {
-			http.Error(w, "Failed to update document", http.StatusInternalServerError)
-			return
-		}
+	// Open the JSON file
+	jsonFile, err := os.Open("internal/config/entities_scores.json")
+	if err != nil {
+		http.Error(w, "Failed to open JSON file", http.StatusInternalServerError)
+		return
 	}
+	defer jsonFile.Close()
+
+	// Read the file into a byte array
+	byteValue, _ := ioutil.ReadAll(jsonFile)
+
+	// Create a map to hold the JSON data
+	var result map[string]interface{}
+
+	// Unmarshal the byte array into the map
+	json.Unmarshal([]byte(byteValue), &result)
+
+	// Access the fields of the entity type
+	fields := result[qrRequest.EntityType]
+
+	// Convert the fields to JSON
+	fieldsJSON, err := json.Marshal(fields)
+	if err != nil {
+		http.Error(w, "Failed to convert fields to JSON", http.StatusInternalServerError)
+		return
+	}
+
+	// Write the JSON to the response
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(fieldsJSON)
 }
 
 func ProcessPayment(w http.ResponseWriter, r *http.Request) {

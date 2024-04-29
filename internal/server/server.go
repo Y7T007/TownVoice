@@ -62,7 +62,7 @@ func SetupRouter() *http.ServeMux {
 	mux.HandleFunc("/login", handlers.LoginHandler)
 	mux.HandleFunc("/auth/register-client", controller.RegisterClient)
 	mux.HandleFunc("/auth/login-client", controller.LoginClient)
-	mux.Handle("/get_number", utils.Middleware(http.HandlerFunc(getNumberHandler)))
+	mux.Handle("/get_number", utils.CorsMiddleware(utils.Middleware(http.HandlerFunc(getNumberHandler))))
 	mux.Handle("/verifytoken", utils.Middleware(http.HandlerFunc(gettoken)))
 
 	routes.CommentRoutes(mux)

@@ -3,11 +3,13 @@ package controllers
 import (
 	"TownVoice/internal/repositories/databasesRepo"
 	"encoding/json"
+	"log"
 	"net/http"
 )
 
 type QRRequest struct {
 	TransactionID string   `json:"transaction_id"`
+	EntityID      string   `json:"entity_id"`
 	EntityType    string   `json:"entity_type"`
 	Elements      []string `json:"elements"`
 	Amount        float64  `json:"amount"`
@@ -21,25 +23,21 @@ func GenerateQRCode(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid request body", http.StatusBadRequest)
 		return
 	}
+
+	// Log the received JSON
+	log.Printf("Received JSON: %+v\n", qrRequest)
+
 	// Create a new FirestoreRepo
 	firestoreRepo := databasesRepo.NewFirestoreRepo()
 
-	// Store the recipient's ID in Firestore
-	_, _, err = firestoreRepo.Client.Collection("recipients").Add(r.Context(), map[string]interface{}{
-		"id": qrRequest.TransactionID,
-	})
+	// Store the QRRequest object in Firestore
+	_, _, err = firestoreRepo.Client.Collection("transactions").Add(r.Context(), qrRequest)
 	if err != nil {
-		http.Error(w, "Failed to store recipient ID", http.StatusInternalServerError)
+		http.Error(w, "Failed to store transaction", http.StatusInternalServerError)
 		return
 	}
-
 }
+
 func ProcessPayment(w http.ResponseWriter, r *http.Request) {
-	// Implement your payment processing logic here
 
-	// For example, you might get the payment details from the request,
-	// call a function from your payment service to process the payment,
-	// and then write a response back to the client.
-
-	// Don't forget to handle errors appropriately!
 }

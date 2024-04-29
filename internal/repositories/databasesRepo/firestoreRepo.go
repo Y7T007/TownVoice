@@ -16,7 +16,6 @@ type FirestoreRepo struct {
 func NewFirestoreRepo() *FirestoreRepo {
 	ctx := context.Background()
 
-	// Set the path to your serviceAccountKey.json file
 	opt := option.WithCredentialsFile(os.Getenv("FIREBASE_CREDENTIALS_PATH"))
 
 	client, err := firestore.NewClient(ctx, "townvoice-485fb", opt)

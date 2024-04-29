@@ -67,6 +67,7 @@ func SetupRouter() *http.ServeMux {
 
 	routes.CommentRoutes(mux)
 	routes.RatingRoutes(mux)
+	routes.PaymentRoutes(mux)
 
 	return mux
 }

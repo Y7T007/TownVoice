@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"TownVoice/internal/repositories/databasesRepo"
+	"cloud.google.com/go/firestore"
 	"encoding/json"
 	"log"
 	"net/http"
@@ -30,11 +31,32 @@ func GenerateQRCode(w http.ResponseWriter, r *http.Request) {
 	// Create a new FirestoreRepo
 	firestoreRepo := databasesRepo.NewFirestoreRepo()
 
-	// Store the QRRequest object in Firestore
-	_, _, err = firestoreRepo.Client.Collection("transactions").Add(r.Context(), qrRequest)
-	if err != nil {
-		http.Error(w, "Failed to store transaction", http.StatusInternalServerError)
-		return
+	// Get a reference to a document named after the entity_id
+	docRef := firestoreRepo.Client.Collection("transactions").Doc(qrRequest.EntityID)
+
+	// Get the current data in the document (if it exists)
+	doc, err := docRef.Get(r.Context())
+	if err != nil && !doc.Exists() {
+		// If the document doesn't exist, create it with the transaction_id as the first item in an array
+		_, err = docRef.Set(r.Context(), map[string][]string{
+			"transaction_ids": {qrRequest.TransactionID},
+		})
+		if err != nil {
+			http.Error(w, "Failed to create document", http.StatusInternalServerError)
+			return
+		}
+	} else {
+		// If the document exists, append the transaction_id to the existing array
+		_, err = docRef.Update(r.Context(), []firestore.Update{
+			{
+				Path:  "transaction_ids",
+				Value: firestore.ArrayUnion(qrRequest.TransactionID),
+			},
+		})
+		if err != nil {
+			http.Error(w, "Failed to update document", http.StatusInternalServerError)
+			return
+		}
 	}
 }
 

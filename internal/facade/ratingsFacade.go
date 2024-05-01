@@ -90,6 +90,78 @@ func AddRating(entityID string, scores map[string]float64, uid string) {
 	log.Printf("Added CID to Firestore with CID %s\n", cid)
 }
 
+// CheckTransaction checks if a document with the entityID exists in the "transactions" collection and if it contains the "transaction_ids" field
+func CheckTransaction(entityId string, transactionID string) (bool, error) {
+	firestoreRepo := databasesRepo.NewFirestoreRepo()
+	ctx := context.Background()
+
+	// Query the "transactions" collection for a document with the entityId
+	docRef := firestoreRepo.Client.Collection("transactions").Doc(entityId)
+	docSnap, err := docRef.Get(ctx)
+	if status.Code(err) == codes.NotFound {
+		// If the document does not exist, return false, nil
+		return false, nil
+	} else if err != nil {
+		// If there is an error during the process, return false, error
+		return false, err
+	}
+
+	// Check if the "transaction_ids" field of the document contains the transactionID
+	data := docSnap.Data()
+	if data != nil {
+		if transactionIds, ok := data["transaction_ids"].([]interface{}); ok {
+			for _, id := range transactionIds {
+				if idStr, ok := id.(string); ok && idStr == transactionID {
+					// If the "transaction_ids" field contains the transactionID, return true, nil
+					return true, nil
+				}
+			}
+		}
+	}
+
+	// If the "transaction_ids" field does not contain the transactionID, return false, nil
+	return false, nil
+}
+
+// DeleteTransaction deletes the transaction id from the "transaction_ids" field of the document with the entityID
+func DeleteTransaction(entityId string, transactionID string) error {
+	firestoreRepo := databasesRepo.NewFirestoreRepo()
+	ctx := context.Background()
+
+	// Query the "transactions" collection for a document with the entityId
+	docRef := firestoreRepo.Client.Collection("transactions").Doc(entityId)
+	docSnap, err := docRef.Get(ctx)
+	if status.Code(err) == codes.NotFound {
+		// If the document does not exist, return an error
+		return fmt.Errorf("document with id %s does not exist", entityId)
+	} else if err != nil {
+		// If there is an error during the process, return the error
+		return err
+	}
+
+	// Get the "transaction_ids" field of the document
+	data := docSnap.Data()
+	if data != nil {
+		if transactionIds, ok := data["transaction_ids"].([]interface{}); ok {
+			// Remove the transactionID from the "transaction_ids" field
+			newTransactionIds := []interface{}{}
+			for _, id := range transactionIds {
+				if idStr, ok := id.(string); ok && idStr != transactionID {
+					newTransactionIds = append(newTransactionIds, idStr)
+				}
+			}
+
+			// Update the "transaction_ids" field of the document
+			_, err = docRef.Set(ctx, map[string]interface{}{"transaction_ids": newTransactionIds}, firestore.MergeAll)
+			if err != nil {
+				// If there is an error during the process, return the error
+				return err
+			}
+		}
+	}
+
+	return nil
+}
 func GetRatingsByEntity(entityID string) ([]models.Rating, error) {
 	// Get a new FirestoreRepo
 	firestoreRepo := databasesRepo.NewFirestoreRepo()

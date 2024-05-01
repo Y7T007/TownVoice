@@ -1,7 +1,12 @@
 package controllers
 
 import (
+	"TownVoice/internal/repositories/databasesRepo"
+	"cloud.google.com/go/firestore"
+	"context"
 	"encoding/json"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -17,7 +22,7 @@ type QRRequest struct {
 }
 
 func GenerateQRCode(w http.ResponseWriter, r *http.Request) {
-	// Decode the request body into a QRRequest object
+	/// Decode the request body into a QRRequest object
 	var qrRequest QRRequest
 	err := json.NewDecoder(r.Body).Decode(&qrRequest)
 	if err != nil {
@@ -25,6 +30,35 @@ func GenerateQRCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Log the received JSON
+	log.Printf("Received JSON: %+v\n", qrRequest)
+
+	// Get a new FirestoreRepo
+	firestoreRepo := databasesRepo.NewFirestoreRepo()
+
+	// Check if a document with the entityID exists in the "transactions" collection
+	docRef := firestoreRepo.Client.Collection("transactions").Doc(qrRequest.EntityID)
+	docSnap, err := docRef.Get(context.Background())
+	if status.Code(err) == codes.NotFound {
+		// If the document does not exist, create a new one with the transactionID in the "transaction_ids" field
+		_, err = docRef.Create(context.Background(), map[string]interface{}{"transaction_ids": []string{qrRequest.TransactionID}})
+		if err != nil {
+			http.Error(w, "Failed to create new document", http.StatusInternalServerError)
+			return
+		}
+	} else if err != nil {
+		http.Error(w, "Error checking document", http.StatusInternalServerError)
+		return
+	} else {
+		// If the document exists, append the transactionID to the "transaction_ids" field
+		transactionIds, _ := docSnap.Data()["transaction_ids"].([]interface{})
+		transactionIds = append(transactionIds, qrRequest.TransactionID)
+		_, err = docRef.Set(context.Background(), map[string]interface{}{"transaction_ids": transactionIds}, firestore.MergeAll)
+		if err != nil {
+			http.Error(w, "Failed to update document", http.StatusInternalServerError)
+			return
+		}
+	}
 	// Log the received JSON
 	log.Printf("Received JSON: %+v\n", qrRequest)
 

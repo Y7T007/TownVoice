@@ -50,11 +50,11 @@ func AddRating(w http.ResponseWriter, r *http.Request) {
 	facade.AddRating(entityId, scores, transactionID)
 
 	// After the rating is added successfully, delete the transaction id
-	err = facade.DeleteTransaction(entityId, transactionID)
-	if err != nil {
-		http.Error(w, "Error deleting transaction", http.StatusInternalServerError)
-		return
-	}
+	//err = facade.DeleteTransaction(entityId, transactionID)
+	//if err != nil {
+	//	http.Error(w, "Error deleting transaction", http.StatusInternalServerError)
+	//	return
+	//}
 
 	// Write a success status and message back to the client
 	w.WriteHeader(http.StatusOK)

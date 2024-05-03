@@ -99,6 +99,7 @@ require (
 	github.com/pelletier/go-toml/v2 v2.2.1 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/rrivera/identicon v0.0.0-20240116195454-d5ba35832c0d // indirect
+	github.com/rs/cors v1.11.0 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
 	github.com/spf13/afero v1.11.0 // indirect
 	github.com/spf13/cast v1.6.0 // indirect

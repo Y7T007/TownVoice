@@ -90,7 +90,6 @@ func AddRating(entityID string, scores map[string]float64, uid string) {
 	log.Printf("Added CID to Firestore with CID %s\n", cid)
 }
 
-// CheckTransaction checks if a document with the entityID exists in the "transactions" collection and if it contains the "transaction_ids" field
 func CheckTransaction(entityId string, transactionID string) (bool, error) {
 	firestoreRepo := databasesRepo.NewFirestoreRepo()
 	ctx := context.Background()
@@ -123,7 +122,6 @@ func CheckTransaction(entityId string, transactionID string) (bool, error) {
 	return false, nil
 }
 
-// DeleteTransaction deletes the transaction id from the "transaction_ids" field of the document with the entityID
 func DeleteTransaction(entityId string, transactionID string) error {
 	firestoreRepo := databasesRepo.NewFirestoreRepo()
 	ctx := context.Background()
@@ -162,6 +160,7 @@ func DeleteTransaction(entityId string, transactionID string) error {
 
 	return nil
 }
+
 func GetRatingsByEntity(entityID string) ([]models.Rating, error) {
 	// Get a new FirestoreRepo
 	firestoreRepo := databasesRepo.NewFirestoreRepo()

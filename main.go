@@ -21,7 +21,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
-	cid, err := ipfs.AddFile(os.Getenv("IPFS_MESSAGE"))
+	cid, err := ipfs.AddFile("Hello world")
 	if err != nil {
 		log.Printf("error adding file to IPFS: %v", err) // Log the error and continue
 	} else {
@@ -29,7 +29,7 @@ func main() {
 	}
 
 	// Initialize Firebase
-	opt := option.WithCredentialsFile(os.Getenv("FIREBASE_CREDENTIALS_PATH"))
+	opt := option.WithCredentialsFile("./internal/config/pringles.json")
 	_, err = firebase.NewApp(context.Background(), nil, opt)
 	if err != nil {
 		log.Fatalf("error initializing app: %v", err)

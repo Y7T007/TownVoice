@@ -11,8 +11,8 @@ import (
 var Shell *shell.Shell
 
 func init() {
-	// Create a new IPFS shell
-	Shell = shell.NewShell("localhost:5001")
+	// Create a new IPFS shell pointing to the API address
+	Shell = shell.NewShell("/ip4/127.0.0.1/tcp/5002")
 }
 
 // AddFile adds a file to IPFS and returns its CID

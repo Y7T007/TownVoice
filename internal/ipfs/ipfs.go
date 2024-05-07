@@ -12,7 +12,7 @@ var Shell *shell.Shell
 
 func init() {
 	// Create a new IPFS shell pointing to the API address
-	Shell = shell.NewShell("/ip4/127.0.0.1/tcp/5002")
+	Shell = shell.NewShell("https://my-ipfs-service-e6khoe6iuq-ew.a.run.app/")
 }
 
 // AddFile adds a file to IPFS and returns its CID

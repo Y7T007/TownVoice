@@ -36,7 +36,7 @@ func main() {
 	}
 
 	srv := &http.Server{
-		Addr:    ":" + os.Getenv("APP_PORT"),
+		Addr:    ":8080",
 		Handler: server.SetupRouter(),
 	}
 

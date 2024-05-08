@@ -1,19 +1,25 @@
+//go:build heroku
+// +build heroku
+
+// main.go
 package main
 
 import (
+	"log"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
+
 	"TownVoice/internal/ipfs"
 	"TownVoice/internal/server"
+
 	"context"
 	firebase "firebase.google.com/go"
 	"fmt"
 	"github.com/joho/godotenv"
 	"google.golang.org/api/option"
-	"log"
 	"net/http"
-	"os"
-	"os/signal"
-	"syscall"
-	"time"
 )
 
 func main() {
@@ -35,8 +41,13 @@ func main() {
 		log.Fatalf("error initializing app: %v", err)
 	}
 
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8082"
+	}
+
 	srv := &http.Server{
-		Addr:    ":8080",
+		Addr:    ":" + port,
 		Handler: server.SetupRouter(),
 	}
 

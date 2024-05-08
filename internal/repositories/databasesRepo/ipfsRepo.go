@@ -9,7 +9,7 @@ type IPFSRepo struct {
 }
 
 func NewIPFSRepo() *IPFSRepo {
-	shell := ipfsapi.NewShell("localhost:5001")
+	shell := ipfsapi.NewShell("https://my-ipfs-service-e6khoe6iuq-ew.a.run.app/")
 
 	return &IPFSRepo{
 		Shell: shell,

@@ -73,11 +73,6 @@ This package sets up the routes for the application. Each file corresponds to a 
 - `payementRoutes.go`: Sets up the routes for payments.
 - `ratingRoutes.go`: Sets up the routes for ratings.
 
-## Design Patterns
-
-- **Facade Pattern**: The `facade` package provides a unified interface to a set of interfaces in the `repositories` package. It simplifies the interface for the client.
-- **Visitor Pattern**: The `Visitor` interface and its implementation (`BadWordDetector`) in the `models` package is an example of the Visitor pattern. It allows new operations to be added without modifying the classes.
-
 # How It Works
 
 When a request comes in, it is first handled by the router which routes the request to the appropriate handler in the `controllers` package. The handler then calls the appropriate function in the `facade` package to perform the business logic. The `facade` package interacts with the `repositories` package to fetch and store data. The `repositories` package interacts with Firestore and IPFS. The response is then sent back to the client.

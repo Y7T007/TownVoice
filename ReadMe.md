@@ -100,8 +100,10 @@ Refer to their respective repositories for setup instructions.
 ## Screenshots
 ### Public Client
 
-![Public Client Rating Screen](preview/public_client_rating_screen.png) ![Public Client Comment Screen](preview/public_client_comment_screen.png)
-
+<div style="display: flex; justify-content: space-between;">
+  <img src="preview/public_client_rating_screen.png" alt="Public Client Rating Screen" width="48%"/>
+  <img src="preview/public_client_comment_screen.png" alt="Public Client Comment Screen" width="48%"/>
+</div>
 
 ## Acknowledgments
 Special thanks to my collaborators:

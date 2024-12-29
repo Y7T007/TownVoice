@@ -105,9 +105,5 @@ Refer to their respective repositories for setup instructions.
   <img src="preview/public_client_comment_screen.png" alt="Public Client Comment Screen" width="48%"/>
 </div>
 
-## Acknowledgments
-Special thanks to my collaborators:
-- **Nossair SEDKi**
-- **Mohammed Amine EL METNI**
 
 Your support and contributions were invaluable in bringing this project to life! 🙌

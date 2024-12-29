@@ -100,8 +100,7 @@ Refer to their respective repositories for setup instructions.
 ## Screenshots
 ### Public Client
 
-![Public Client Rating Screen](preview/public_client_rating_screen.png)
-![Public Client Comment Screen](preview/public_client_comment_screen.png)
+![Public Client Rating Screen](preview/public_client_rating_screen.png) ![Public Client Comment Screen](preview/public_client_comment_screen.png)
 
 
 ## Acknowledgments

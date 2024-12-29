@@ -1,78 +1,112 @@
-# Project Setup
+# **TownVoice**Blockchain-Based Rating System ✨
 
-This project is a Go-based application that uses Firebase for authentication, Firestore as a NoSQL database, and IPFS for decentralized storage. It also uses a variety of design patterns such as the Visitor pattern.
+Welcome to the **TOWN VOICE** project! 🚀 This system ensures transparency and reliability for rating and commenting on public and private services like restaurants, organizations, and more. By leveraging **blockchain technology** for storing data and **Firebase** for auxiliary functionalities, this project offers a robust and trustworthy solution. 
 
-## Prerequisites
+### Project Author
+Developed with dedication by **Yassir WAHID (Y7TT007)**. 🌐 Visit my [website](https://ywahid.eu) for more details on my work.
 
-- Go 1.16 or later
-- Firebase account
-- IPFS installed and running locally
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Architecture](#architecture)
+  - [Overview](#overview)
+  - [Component Breakdown](#component-breakdown)
+- [Repositories](#repositories)
+- [Getting Started](#getting-started)
+- [Screenshots](#screenshots)
+- [Acknowledgments](#acknowledgments)
 
-## Steps to Setup
+## Project Overview
+This application is designed to:
+- **Rate and comment** on services using QR codes.
+- Ensure **transparency** by storing all ratings and comments on a blockchain database.
+- Provide **administrative tools** to analyze data and view trends.
 
-1. Clone the repository to your local machine.
-2. Install the required Go packages by running `go mod tidy`.
-3. Set up Firebase:
-    - Create a new Firebase project.
-    - Enable Email/Password sign-in under the Authentication sign-in method.
-    - Generate a new private key file for your service account.
-    - Save the JSON file and note down the path.
-4. Set up environment variables:
-    - Create a `.env` file in the root directory.
-    - Add the following lines to the file:
-      ```
-      FIREBASE_CREDENTIALS_PATH=<path_to_your_firebase_credentials_json_file>
-      APP_PORT=8080
-      IPFS_MESSAGE="Hello, IPFS!"
-      ```
-5. Run the application by executing `go run main.go`.
+The system comprises three main components:
+1. **Backend**: Powered by Go and blockchain.
+2. **Public Client**: A React-based app for users to scan QR codes and submit ratings/comments.
+3. **Admin Client**: A React-based app for administrators to view analytics and manage the system.
 
-# Documentation
+## Architecture
+### Overview
+Below is a high-level architecture of the system:
 
-## `main.go`
+![Architecture Overview](preview/architecture_overview.png)
 
-This is the entry point of the application. It loads environment variables, initializes Firebase, sets up the HTTP server, and listens for incoming requests.
+### Component Breakdown
+1. **Adapter Pattern for QR Codes**:
+   - Converts QR code data into compatible formats for the system.
+   - Ensures seamless interaction with the blockchain.
+   
+   ![QR Code Adapter](preview/qr_code_adapter.png)
 
-## `server.go`
+2. **Repository Pattern for Blockchain Database**:
+   - Manages interactions with the IPFS-based blockchain.
+   - Provides abstraction for data storage and retrieval.
 
-This file sets up the HTTP router and defines the routes for the application.
+   ![Repository Pattern](preview/repository_pattern.png)
 
-## `controllers` package
+3. **Facade Pattern for Inter-Repos Communication**:
+   - Connects the backend with public and admin clients.
+   - Simplifies complex operations into user-friendly APIs.
 
-This package contains the HTTP handlers for the application. Each file corresponds to a different part of the application:
+   ![Facade Pattern](preview/facade_pattern.png)
 
-- `commentsController.go`: Handles HTTP requests related to comments.
-- `entitiesController.go`: Handles HTTP requests related to entities.
-- `payementsController.go`: Handles HTTP requests related to payments.
-- `ratingController.go`: Handles HTTP requests related to ratings.
+4. **Visitor Pattern for Comment Moderation**:
+   - Detects inappropriate or offensive words before storing comments on the blockchain.
+   - Ensures data integrity and compliance.
 
-## `models` package
+   ![Visitor Pattern](preview/visitor_pattern.png)
 
-This package contains the data structures used in the application:
+5. **Middleware Pattern for Authentication**:
+   - Implements secure user authentication and authorization.
+   - Protects sensitive routes and ensures data security.
 
-- `comment.go`: Defines the `Comment` struct and the `Visitor` interface for the Visitor pattern.
-- `entities.go`: Defines the `Entity` struct.
-- `rating.go`: Defines the `Rating` struct.
-- `user.go`: Defines the `User` struct.
-- `visitorComment.go`: Defines the `BadWordDetector` struct which implements the `Visitor` interface.
+   ![Middleware Pattern](preview/middleware_pattern.png)
 
-## `facade` package
+## Repositories
+1. **[Backend Repository](https://github.com/Y7T007/TownVoice)** (current repo):
+   - Built with Go and blockchain technologies.
 
-This package contains the business logic of the application. It interacts with the repositories to fetch and store data.
+2. **[Public Client Repository](https://github.com/Y7T007/TownVoiceFrontEnd)**:
+   - React-based app for users to rate and comment.
 
-## `repositories` package
+3. **[Admin Client Repository](https://github.com/Y7T007/TownVoice-Dashboard-Entreprise)**:
+   - React-based app for administrators to view and analyze data.
 
-This package contains the data access layer of the application. It interacts with Firestore and IPFS to fetch and store data.
+## Getting Started
+### Prerequisites
+- Go (1.18 or later)
+- Firebase credentials
+- Node.js (for client apps)
 
-## `routes` package
+### Backend Setup
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Y7T007/blockchain-rating-backend.git
+   cd blockchain-rating-backend
+   ```
+2. Install dependencies:
+   ```bash
+   go mod tidy
+   ```
+3. Run the server:
+   ```bash
+   go run main.go
+   ```
 
-This package sets up the routes for the application. Each file corresponds to a different part of the application:
+### Public and Admin Clients
+Refer to their respective repositories for setup instructions.
 
-- `commentsRoutes.go`: Sets up the routes for comments.
-- `entitiesRoutes.go`: Sets up the routes for entities.
-- `payementRoutes.go`: Sets up the routes for payments.
-- `ratingRoutes.go`: Sets up the routes for ratings.
+## Screenshots
+### Public Client
 
-# How It Works
+![Public Client Rating Screen](preview/public_client_rating_screen.png)
+![Public Client Comment Screen](preview/public_client_comment_screen.png)
 
-When a request comes in, it is first handled by the router which routes the request to the appropriate handler in the `controllers` package. The handler then calls the appropriate function in the `facade` package to perform the business logic. The `facade` package interacts with the `repositories` package to fetch and store data. The `repositories` package interacts with Firestore and IPFS. The response is then sent back to the client.
+
+## Acknowledgments
+Special thanks to my collaborators:
+- **Nossair SEDKi**
+- **Mohammed Amine EL METNI**
+
+Your support and contributions were invaluable in bringing this project to life! 🙌

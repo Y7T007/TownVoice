@@ -1,4 +1,4 @@
-# **TownVoice**Blockchain-Based Rating System ✨
+# **TownVoice** Blockchain-Based Rating System ✨
 
 Welcome to the **TOWN VOICE** project! 🚀 This system ensures transparency and reliability for rating and commenting on public and private services like restaurants, organizations, and more. By leveraging **blockchain technology** for storing data and **Firebase** for auxiliary functionalities, this project offers a robust and trustworthy solution. 
 
